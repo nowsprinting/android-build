@@ -1,51 +1,56 @@
 # Build script for Android project.
+Androidプロジェクト用のビルドスクリプトです。
 
 
 
-## 使いかた
-Androidプロジェクト直下にファイルを置き、実行します
+# 使いかた
+Androidプロジェクト直下にpuild.pyファイルを置き、実行します。
 
     $ build.py
-.apkファイルが "\<project.name\>_\<versionName\>.\<versionCode\>.apk" に作られます。
 
-もしプロジェクトディレクトリ下に "build.xml" ファイルが無い場合、先に下記コマンドを実行してください。
+完了すると、.apkファイルが bin/\<project.name\>_\<versionName\>.\<versionCode\>.apk に出力されます。
+
+もしプロジェクトディレクトリ下にbuild.xmlファイルが無い場合、先に下記コマンドを実行してください。
+
     $ android update project -p .
 
 
 
-## スクリプトの処理内容
-以下の処理を行ないます
+# スクリプトの処理内容
+本スクリプトは、以下の処理を行ないます。
 
-1. ビルド前に"AndroidManifest.xml"を更新します
+1. ビルド前にAndroidManifest.xmlを更新します
 
-    1.1 android:debuggableを "false" に置換
+    1.1 android:debuggableをFalseに置換
 
     1.2 android:versionCodeをインクリメント
 
-1. "res/values/copyright.xml"を生成もしくは更新します
+1. res/values/copyright.xmlを生成もしくは更新します
 
 1. Antによるビルドを実行します（$ ant release）
 
-1. .apkファイルのファイル名を変更します
+1. .apkファイルのファイル名を変更します（フォーマットは上記）
 
-1. 再び"AndroidManifest.xml"を更新します
+1. 再びAndroidManifest.xmlを更新します
 
-    5.1 android:debuggableを "true" に置換
+    5.1 android:debuggableをTrueに置換
 
 
 
-## 注意事項：スクリプトが自動生成するファイルについて
+# 注意事項：スクリプトが自動生成するファイルについて
 
-1. build.version
+### build.version
 
-    ビルド時にインクリメントした "android:versionCode" が格納され、次のビルドで使用されます。
-    ".gitignore"ファイルに追加しておくことをおすすめします。
+ビルド時にインクリメントしたandroid:versionCodeが格納され、次のビルドで使用されます。
 
-1. res/values/copyright.xml
+ブランチを切り替えても常にandroid:versionCodeが前に進むようにするために
+VCSのignoreファイルに追加しておくことをおすすめします。
 
-    アプリ内でCopyright表示に使うための"年"が書きこまれます。
-    都度上書きされますので、他の\<string\>を追加するなどしても消えてしまいます。
 
-    ただし、"copyright_year_to"の値が未来年の場合、値は上書きされません
-    （今年に戻されることはありません）。
+### res/values/copyright.xml
 
+アプリ内でCopyright表示に使うための"年"が書きこまれます。
+ビルドの都度上書きされますので、他の\<string\>を追加するなどしても消えてしまいます。
+
+ただし、"copyright\_year\_to"の値が未来年の場合、値は上書きされません
+（今年に戻されてしまうことはありません）。
