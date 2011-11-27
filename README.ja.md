@@ -21,7 +21,7 @@ Androidプロジェクト直下にpuild.pyファイルを置き、実行しま�
 
 1. ビルド前にAndroidManifest.xmlを更新します
 
-    1.1 android:debuggableをFalseに置換
+    1.1 android:debuggableをfalseに置換
 
     1.2 android:versionCodeをインクリメント
 
@@ -33,7 +33,7 @@ Androidプロジェクト直下にpuild.pyファイルを置き、実行しま�
 
 1. 再びAndroidManifest.xmlを更新します
 
-    5.1 android:debuggableをTrueに置換
+    5.1 android:debuggableをtrueに置換
 
 
 

@@ -14,13 +14,13 @@ Usage
 
 Processing this script
     1. Update the "AndroidManifest.xml" file.
-        1.1 Replace android:debuggable to "False".
+        1.1 Replace android:debuggable to "false".
         1.2 Increment android:versionCode.
     2. Create or update the "res/values/copyright.xml" file.
     3. Build project for release.
     4. Rename .apk file to "<project.name>_<versionName>.<versionCode>.apk"
     5. Update the "AndroidManifest.xml" file.
-        5.1 Replace android:debuggable to "True".
+        5.1 Replace android:debuggable to "true".
 
 Cautions: This script create the following files.
     1. build.version
@@ -75,7 +75,7 @@ class Manifest:
             temp = open(TEMP_FILE, 'w')
             for line in read:
                 line = re.sub(self._VERSION_CODE+'="\d+"', self._VERSION_CODE+'="'+self.versionCode+'"', line)
-                line = re.sub(self._DEBUGGABLE+'="\w+"',   self._DEBUGGABLE + '="'+str(bool(self.debuggable))+'"', line)
+                line = re.sub(self._DEBUGGABLE+'="\w+"',   self._DEBUGGABLE + '="'+str(bool(self.debuggable)).lower()+'"', line)
                 temp.write(line)
         finally:
             read.close()
