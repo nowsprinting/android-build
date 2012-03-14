@@ -206,6 +206,13 @@ if __name__ == '__main__':
     shutil.move('bin/'+build_xml.projectName+'-release.apk',
             'bin/'+build_xml.projectName+'_'+manifest.versionName+'.'+manifest.versionCode+'.apk')
 
+    # Rename proguard mapping file.
+    try:
+        shutil.move('bin/proguard/mapping.txt',
+                'bin/'+build_xml.projectName+'_'+manifest.versionName+'.'+manifest.versionCode+'_mapping.txt')
+    except (IOError, OSError):
+        pass
+
     # After build.
     manifest.debuggable = True
     manifest.write()
